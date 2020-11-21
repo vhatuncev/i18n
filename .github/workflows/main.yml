@@ -53,7 +53,7 @@ jobs:
       - name: Artifacts
         uses: actions/upload-artifact@v2.2.1
         with:
-          name: $GITHUB_RUN_ID $GITHUB_RUN_NUMBER $GITHUB_REF $GITHUB_SHA
+          name: ${{ GITHUB_RUN_ID }} ${{GITHUB_RUN_NUMBER }} ${{ GITHUB_REF }} ${{ GITHUB_SHA }}
           path: |
             src\**\Release\**
         
