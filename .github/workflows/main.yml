@@ -51,10 +51,11 @@ jobs:
         run:  '& "$(vswhere -property installationPath)\Common7\IDE\MSTest.exe" /testcontainer:src\i18n.Tests\bin\Release\i18n.Tests.dll'
       
       - name: Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2.2.1
         with:
+          name: $GITHUB_RUN_ID $GITHUB_RUN_NUMBER GITHUB_REF GITHUB_SHA
           path: |
-            src\**
+            src\**\Release\**
         
         
         
