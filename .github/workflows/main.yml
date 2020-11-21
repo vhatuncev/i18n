@@ -1,7 +1,7 @@
 name: CI
 
 env:
-  config: Debug
+  config: Release
   solutionName: src\i18n.sln
   vsixContainer: ${{ github.workspace }}\POTGenerator.vsix
 
