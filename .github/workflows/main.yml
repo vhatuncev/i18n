@@ -50,7 +50,7 @@ jobs:
         with:
           name: ci_${{ github.run_number }}_commit_${{ github.sha }} 
           path: |
-            src\**\bi\Release\**
+            src\**\bin\Release\**
         
         
         
