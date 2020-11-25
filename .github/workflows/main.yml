@@ -3,8 +3,7 @@ name: CI
 env:
   config: Release
   solutionName: src\i18n.sln
-  vsixContainer: ${{ github.workspace }}\POTGenerator.vsix
-
+  
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
@@ -15,10 +14,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  
-     
-     
-     
    # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -42,7 +37,7 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
         
       - name: Restore NuGet  
-        run: nuget restore src\i18n.sln
+        run: nuget restore ${{ env.solutionName }}
         
       - name: Build the Solution
         run: msbuild  ${{ env.solutionName }} /p:Configuration=${{ env.config }}  /p:DeployExtension=False /verbosity:minimal
@@ -55,7 +50,7 @@ jobs:
         with:
           name: ci_${{ github.run_number }}_commit_${{ github.sha }} 
           path: |
-            src\**\Release\**
+            src\**\bi\Release\**
         
         
         
