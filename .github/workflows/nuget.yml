@@ -8,5 +8,3 @@ on:
   push:
     tags:
       - 'release*'
-    tags-ignore:
-      - ''
