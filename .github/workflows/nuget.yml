@@ -9,7 +9,7 @@ on:
   # tags:
    #   - 'release*'
     branches: [ nuget_publish ]
-defaults:
+#defaults:
  # run:
     #shell: pwsh
       # A workflow run is made up of one or more jobs that can run sequentially or in parallel
