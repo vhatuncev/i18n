@@ -49,10 +49,6 @@ jobs:
          $SOURCE_BRANCH = ${env:GITHUB_REF} -replace ‘refs/heads/’, ‘’
          $SOURCE_TAG = ${env:GITHUB_REF} -replace ‘refs/tags/’, ‘’
 
-         echo “::set-env name=SOURCE_NAME::$SOURCE_NAME”
-         echo “::set-env name=SOURCE_BRANCH::$SOURCE_BRANCH”
-         echo “::set-env name=SOURCE_TAG::$SOURCE_TAG”
-
       - name: Variables test
         run: |
           echo $SOURCE_NAME
