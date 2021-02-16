@@ -38,8 +38,8 @@ jobs:
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
        
-      - name: Releas tag
-        run : echo ${{ github.event.release.tag_name }}
+      # - name: Releas tag
+      #   run : echo ${{ github.event.release.tag_name }}
 
       - name: Setup variables
         id: set_variables
