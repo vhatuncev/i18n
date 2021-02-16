@@ -33,11 +33,12 @@ jobs:
         
       - name: Get the version
         id: get_version
-        run: |
-           ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-           echo ${{ steps.get_version.outputs.VERSION }}
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
         shell: bash
 
+
+      - name: test
+        run: echo ${{ steps.get_version.outputs.VERSION }}
       # - name: pws
       #   run: |
       #     $verPre = "2.1.1.1";
