@@ -8,7 +8,7 @@ on:
   push:
     tags:
       - 'v*'
-    branches: [ nuget_publish ]
+    #branches: [ nuget_publish ]
 #defaults:
  # run:
     #shell: pwsh
@@ -34,7 +34,7 @@ jobs:
       - name: Get the version
         id: get_version
         run: |
-           echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+           ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
            echo ${{ steps.get_version.outputs.VERSION }}
         shell: bash
 
