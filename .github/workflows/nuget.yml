@@ -37,10 +37,42 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-          
+       
+      - name: Releas tag
+        run : echo ${{ github.event.release.tag_name }}
+
+      - name: Setup variables
+        id: set_variables
+        run: |
+          echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
+          echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
+          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+
+      - name: Variables test
+        run: |
+          echo $SOURCE_NAME
+          echo $SOURCE_BRANCH
+          echo $SOURCE_TAG
+        env:
+          SOURCE_NAME: ${{ steps.branch_name.outputs.SOURCE_NAME }}
+          SOURCE_BRANCH: ${{ steps.branch_name.outputs.SOURCE_BRANCH }}
+          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
+
       - name: pws
-        run: updateAssemblyInfo
+        run: |
+          $verPre = "2.1.1.1";
+          $ver = "3.1";
+
+          Get-ChildItem 'src\**\AssemblyInfo.cs' -Recurse | ForEach-Object -Process {
+          (Get-Content $_) `
+              -replace 'version="(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('version="' + $verPre + '"')`
+              -replace 'AssemblyVersion."(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('AssemblyVersion("' + $ver + '"')`
+              -replace 'AssemblyFileVersion."(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('AssemblyFileVersion("' + $ver + '"')`
+              -replace 'AssemblyInformationalVersion."(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('AssemblyInformationalVersion("' + $verPre + '"')`
+            | Out-File $_ -Encoding utf8
+          }
         shell: powershell
+        #working-directory: ./src
           
         
         
