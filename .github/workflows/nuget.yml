@@ -43,11 +43,11 @@ jobs:
       - name: update_version
         run: |
           Get-ChildItem 'src\**\AssemblyInfo.cs' -Recurse | ForEach-Object -Process {
-          (Get-Content $_) `
-              -replace 'version="(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('version="' + '${{ steps.get_version.outputs.VERSION }}'' + '"')`
-              -replace 'AssemblyVersion."(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('AssemblyVersion("' + '${{ steps.get_version.outputs.VERSION }}'' + '"')`
-              -replace 'AssemblyFileVersion."(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('AssemblyFileVersion("' + '${{ steps.get_version.outputs.VERSION }}' + '"')`
-              -replace 'AssemblyInformationalVersion."(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('AssemblyInformationalVersion("' + '${{ steps.get_version.outputs.VERSION }}' + '"')`
+          (Get-Content $_) 
+            ` -replace 'version="(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('version="${{ steps.get_version.outputs.VERSION }}"')`
+              -replace 'AssemblyVersion."(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('AssemblyVersion("${{ steps.get_version.outputs.VERSION }}"')`
+              -replace 'AssemblyFileVersion."(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('AssemblyFileVersion("${{ steps.get_version.outputs.VERSION }}"')`
+              -replace 'AssemblyInformationalVersion."(\d+)(\.\d+)(\.\d+)(?:(?:\.\d+)?|(\-\w+)?)?"', ('AssemblyInformationalVersion("${{ steps.get_version.outputs.VERSION }}"')`
             | Out-File $_ -Encoding utf8
           }
         shell: powershell
