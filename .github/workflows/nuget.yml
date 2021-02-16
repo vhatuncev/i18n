@@ -34,11 +34,13 @@ jobs:
      # - name: tag number
 #        run : echo ${{ github.event.release.tag_name }}
 
-      - name: tag number2
+      - name: Get the version
+        id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
           
       - name: pws
-        run: |
-          updateAssemblyInfo.ps1
+        run: updateAssemblyInfo
+        shell: powershell
+          
         
         
