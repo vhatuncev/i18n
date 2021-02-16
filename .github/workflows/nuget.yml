@@ -25,15 +25,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
+      # - name: Setup MSBuild
+      #   uses: microsoft/setup-msbuild@v1
       
-      - name: echo MSBuild
-        run: msbuild -version
+      # - name: echo MSBuild
+      #   run: msbuild -version
         
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: |
+           echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+           echo ${{ steps.get_version.outputs.VERSION }}
         shell: bash
 
       # - name: pws
