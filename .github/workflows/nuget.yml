@@ -36,7 +36,8 @@ jobs:
 
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs/tags/}
+        shell: bash
        
       # - name: Releas tag
       #   run : echo ${{ github.event.release.tag_name }}
@@ -44,9 +45,13 @@ jobs:
       - name: Setup variables
         id: set_variables
         run: |
-          echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
-          echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
-          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+         $SOURCE_NAME = ${env:GITHUB_REF} -replace ‘refs/\w+/’, ‘’
+         $SOURCE_BRANCH = ${env:GITHUB_REF} -replace ‘refs/heads/’, ‘’
+         $SOURCE_TAG = ${env:GITHUB_REF} -replace ‘refs/tags/’, ‘’
+
+         echo “::set-env name=SOURCE_NAME::$SOURCE_NAME”
+         echo “::set-env name=SOURCE_BRANCH::$SOURCE_BRANCH”
+         echo “::set-env name=SOURCE_TAG::$SOURCE_TAG”
 
       - name: Variables test
         run: |
