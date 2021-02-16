@@ -6,8 +6,8 @@ env:
   
 on:  
   push:
-  # tags:
-   #   - 'release*'
+    tags:
+      - 'v*'
     branches: [ nuget_publish ]
 #defaults:
  # run:
