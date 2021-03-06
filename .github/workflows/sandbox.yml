@@ -13,6 +13,9 @@ jobs:
   build:
     runs-on: [ windows-latest ]
     steps:
+      - name: pull source code
+      - uses: actions/checkout@v2
+      
       - name: run script
         shell: pwsh
         run: | 
