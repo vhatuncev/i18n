@@ -6,8 +6,8 @@ env:
   
 on:  
   push:
-    tags:
-      - '*'
+    branches:
+      - "nuget_publish"
 
 jobs:
   build:
