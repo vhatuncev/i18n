@@ -15,4 +15,4 @@ jobs:
     steps:
       - name: run script
         run: .\updateVersion.ps1
-        shell: powershell
+        shell: pwsh
