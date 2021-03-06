@@ -14,5 +14,5 @@ jobs:
     runs-on: [ windows-latest ]
     steps:
       - name: run script
-        run: updateVersion.ps1
+        run: updateVersion
         shell: powershell
